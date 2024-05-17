@@ -32,7 +32,7 @@ const [res,setRes] =useState([])
   Data()
   
 
-  },[])
+  })
 
   useEffect(() => {
     // Combine 'sum' and 'save' and update 'res'
