@@ -67,7 +67,9 @@ function Edit({sav}) {
           <Button onClick={handleadd}  variant="primary">Edit</Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer />
     </div>
+   
   );
 }
 

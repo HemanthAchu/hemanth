@@ -20,10 +20,10 @@ const [res,setRes] =useState([])
   const Data= async ()=>{
     try{
       const result = await getDataAPI()
-      console.log(result.data);
+     
       if(result.status==200){
         setsum(result.data)
-        console.log(sum);
+       
       }
         }catch(err){
       console.log(err);
@@ -32,14 +32,14 @@ const [res,setRes] =useState([])
   Data()
   
 
-  })
+  },[])
 
   useEffect(() => {
     // Combine 'sum' and 'save' and update 'res'
     setRes([...sum, ...save]);
   }, [sum, save,]);
   
-  console.log(res);
+  
 
   return (
     <div>
@@ -49,7 +49,7 @@ const [res,setRes] =useState([])
     
     
 
-    <Views save={res} />
+    <Views sum={sum} save={res} />
     </div>
     </div>
   )

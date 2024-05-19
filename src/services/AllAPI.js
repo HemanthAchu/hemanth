@@ -16,6 +16,6 @@ export const getDataAPI =async()=>{
 export const EditrecipeAPI = async (id, reqBody) => {
     return await commonAPI("PUT", `${SERVER_URL}/edit/${id}`, reqBody);
 };
-export const editProjectAPI =async(projectId,reqBody)=>{
+export const editAPI =async(projectId,reqBody)=>{
     return await commonAPI("PUT",`${SERVER_URL}/edit-project/${projectId}`,reqBody)
 }

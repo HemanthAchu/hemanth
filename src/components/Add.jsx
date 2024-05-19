@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import { AddrecipeAPI,getDataAPI } from '../services/AllAPI';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Add() {
 
   const[sum,setsum]=useState()
@@ -24,7 +25,7 @@ const [data,setdata]=useState({
 useEffect(()=>{
 Data()
 },[])
-const Data= async ()=>{
+const Data =async()=>{
   try{
     const result = await getDataAPI()
     if(result.status==200){
@@ -35,7 +36,7 @@ const Data= async ()=>{
     console.log(err);
       }
 }
-console.log(sum);
+
 const handleadd = async () => {
  try{
   const reqBody = new FormData();
@@ -46,21 +47,26 @@ const handleadd = async () => {
   reqBody.append("prepTimeMinutes", data.prepTimeMinutes);
 
   const result = await AddrecipeAPI(reqBody);
-  console.log(result);
-  setdata({
-    name:"",
-    caloriesPerServing:"",
-    cookTimeMinutes:"",
-    cuisine :"",
-    prepTimeMinutes:""
-  })
-  handleClose()
+ 
+  if(result.status==200){
+    toast.success("SuccessFully Add")
+    setdata({
+      name:"",
+      caloriesPerServing:"",
+      cookTimeMinutes:"",
+      cuisine :"",
+      prepTimeMinutes:""
+    })
+    handleClose()
+  }
+
+ 
  }catch(err){
 console.log(err);
  }
 };
 
-console.log(data);
+
   return (
     <div>
            <Button variant="primary" onClick={handleShow}>
@@ -86,9 +92,10 @@ console.log(data);
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={handleadd}  variant="primary">Save</Button>
+          <Button onClick={handleadd} variant="primary">Save</Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer/>
     </div>
   )
 }
